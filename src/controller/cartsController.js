@@ -277,26 +277,8 @@ export class CartsController {
 
       const total = prodOK.reduce((acc, prod) => acc + parseFloat(prod.subtotal), 0).toFixed(2);
 
-      let ticket = await ticketService.createTicket({ code: v4(), amount: total, purchaser: user.email });
-      req.ticket = ticket
-      if (!ticket) {
-        return res.status(500).json({ error: "error al generar ticket" });
-      }
+      return res.status(200).json({total: total})
 
-      let message = `Informe de compra
-    Total: ${total}
-    Productos finales:
-    ${prodOK.map(prod => `Cantidad: ${prod.quantity}\nTitulo: <strong>${prod.product.title}</strong>\nSubtotal: ${prod.subtotal}`).join('\n\n')}
-    Para mas informacion o ante algun eventual incoveniente, comunicarse con un Administrador`;
-
-
-
-      let rta = await sendMail(user.email, "Confirmacion de compra", message)
-      if (rta.accepted.length > 0) {
-        return res.status(200).json({ ticket: ticket });
-      } else {
-        return res.status(500).json({ error: 'Error interno para finalizar la compra, Contacte urgente un Administrador' })
-      }
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }

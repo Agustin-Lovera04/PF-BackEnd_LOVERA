@@ -19,6 +19,7 @@ import { middleLogg } from "./utils/winstonLogger.js";
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUI from 'swagger-ui-express'
 import handlebarsHelpers from 'handlebars-helpers';
+import stripe from 'stripe'
 
 const PORT = config.PORT;
 
@@ -74,6 +75,9 @@ app.use('/api/users', userManagerRouter)
 app.use("/", viewsRouter);
 
 app.use(errorHandler)
+
+export const stripeInstance = stripe('sk_test_51P32hmBY9ZWDmWHr75CGTLNHQasYQGrMwXoS1Wd4KYxloMQJb0gEN6XqsFjMHGxbsEL9DiTbss4vUBT0DfXSX8Hz00G1IgUmKN')
+
 
 const serverHTTP = app.listen(PORT, () => {
 });
