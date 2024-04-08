@@ -61,7 +61,6 @@ export const securityAcces = (permissions = []) => {
 };
 
 
-/* MIDLE MULTER */
 import multer from 'multer'
 import { userService } from "./services/user.Service.js";
 
