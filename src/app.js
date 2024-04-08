@@ -76,7 +76,7 @@ app.use("/", viewsRouter);
 
 app.use(errorHandler)
 
-export const stripeInstance = stripe('sk_test_51P32hmBY9ZWDmWHr75CGTLNHQasYQGrMwXoS1Wd4KYxloMQJb0gEN6XqsFjMHGxbsEL9DiTbss4vUBT0DfXSX8Hz00G1IgUmKN')
+export const stripeInstance = stripe(config.KEY_SECRET_STRIPE)
 
 
 const serverHTTP = app.listen(PORT, () => {
